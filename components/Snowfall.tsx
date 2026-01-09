@@ -23,55 +23,58 @@ const Snowfall: React.FC = () => {
     let flakes: Snowflake[] = [];
 
     const initFlakes = (width: number, height: number) => {
-      // Density calculation
-      const flakeCount = Math.floor((width * height) / 10000); // Responsive count
+      const flakeCount = Math.floor((width * height) / 12000); 
       flakes = [];
       for (let i = 0; i < flakeCount; i++) {
         flakes.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          radius: Math.random() * 2 + 0.5, // 0.5px to 2.5px
-          speed: Math.random() * 1 + 0.2, // 0.2 to 1.2 speed
-          opacity: Math.random() * 0.5 + 0.1, // 0.1 to 0.6 opacity
-          drift: Math.random() * 1 - 0.5, // Horizontal drift
+          radius: Math.random() * 2 + 0.5,
+          speed: Math.random() * 1 + 0.2,
+          opacity: Math.random() * 0.5 + 0.1,
+          drift: Math.random() * 1 - 0.5,
         });
       }
     };
 
     const handleResize = () => {
-      if (canvas) {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        initFlakes(canvas.width, canvas.height);
+      if (canvas && ctx) {
+        const dpr = window.devicePixelRatio || 1;
+        
+        canvas.width = window.innerWidth * dpr;
+        canvas.height = window.innerHeight * dpr;
+        
+        canvas.style.width = `${window.innerWidth}px`;
+        canvas.style.height = `${window.innerHeight}px`;
+        
+        ctx.scale(dpr, dpr);
+
+        initFlakes(window.innerWidth, window.innerHeight);
       }
     };
 
-    // Initial setup
     handleResize();
     window.addEventListener('resize', handleResize);
 
-    // Animation Loop
     const render = () => {
       if (!ctx || !canvas) return;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
       flakes.forEach((flake) => {
-        // Update Position
         flake.y += flake.speed;
         flake.x += flake.drift;
 
-        // Reset if out of bounds
-        if (flake.y > canvas.height) {
+        if (flake.y > window.innerHeight) {
           flake.y = -5;
-          flake.x = Math.random() * canvas.width;
+          flake.x = Math.random() * window.innerWidth;
         }
-        if (flake.x > canvas.width) {
+        if (flake.x > window.innerWidth) {
           flake.x = 0;
         } else if (flake.x < 0) {
-          flake.x = canvas.width;
+          flake.x = window.innerWidth;
         }
 
-        // Draw
         ctx.beginPath();
         ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(255, 255, 255, ${flake.opacity})`;
