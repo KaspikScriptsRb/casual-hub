@@ -14,23 +14,19 @@ const ScriptModal: React.FC<ScriptModalProps> = ({ isOpen, onClose, content }) =
   const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
-    let timeoutId: number;
-    
     if (isOpen) {
       setShouldRender(true);
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setIsAnimating(true);
-        });
-      });
+      const timer = setTimeout(() => {
+        setIsAnimating(true);
+      }, 10);
+      return () => clearTimeout(timer);
     } else {
       setIsAnimating(false);
-      timeoutId = window.setTimeout(() => {
+      const timer = setTimeout(() => {
         setShouldRender(false);
       }, 500);
+      return () => clearTimeout(timer);
     }
-
-    return () => clearTimeout(timeoutId);
   }, [isOpen]);
 
   if (!shouldRender) return null;
@@ -65,7 +61,6 @@ const ScriptModal: React.FC<ScriptModalProps> = ({ isOpen, onClose, content }) =
             : 'scale-90 translate-y-12 opacity-0'
         }`}
       >
-        {/* Header */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-zinc-800/50 bg-zinc-900/20 rounded-t-2xl">
           <div className="flex items-center gap-3">
              <div className="p-2 bg-zinc-900 rounded-lg border border-zinc-800">
@@ -83,11 +78,8 @@ const ScriptModal: React.FC<ScriptModalProps> = ({ isOpen, onClose, content }) =
             <X className="w-5 h-5" />
           </button>
         </div>
-
-        {/* Content Area */}
         <div className="p-6">
           <div className="relative">
-            {/* Clean code block without buggy effects */}
             <pre className="w-full h-32 md:h-28 p-5 rounded-xl bg-black border border-zinc-800 text-zinc-300 font-mono text-xs md:text-sm overflow-x-auto whitespace-pre-wrap break-all shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)]">
               {content}
             </pre>
@@ -96,8 +88,6 @@ const ScriptModal: React.FC<ScriptModalProps> = ({ isOpen, onClose, content }) =
             Copy the script above and paste it into your executor of choice.
           </p>
         </div>
-
-        {/* Footer Actions */}
         <div className="px-6 py-4 bg-zinc-900/30 rounded-b-2xl flex justify-end items-center border-t border-zinc-800/30">
           <button
             onClick={handleCopy}
