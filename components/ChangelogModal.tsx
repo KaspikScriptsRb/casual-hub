@@ -76,28 +76,23 @@ const ChangelogModal: React.FC<ChangelogModalProps> = ({ isOpen, onClose }) => {
   const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
-    let timeoutId: number;
-    
     if (isOpen) {
       setShouldRender(true);
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setIsAnimating(true);
-        });
-      });
+      const timer = setTimeout(() => {
+        setIsAnimating(true);
+      }, 10);
+      return () => clearTimeout(timer);
     } else {
       setIsAnimating(false);
-      timeoutId = window.setTimeout(() => {
+      const timer = setTimeout(() => {
         setShouldRender(false);
       }, 500);
+      return () => clearTimeout(timer);
     }
-
-    return () => clearTimeout(timeoutId);
   }, [isOpen]);
 
   if (!shouldRender) return null;
 
-  // Helper to style tag prefixes
   const renderItem = (text: string) => {
     let icon = <Hash className="w-3.5 h-3.5 text-zinc-500 shrink-0 mt-1" />;
     let content = text;
@@ -149,7 +144,6 @@ const ChangelogModal: React.FC<ChangelogModalProps> = ({ isOpen, onClose }) => {
             : 'scale-90 translate-y-12 opacity-0'
         }`}
       >
-        {/* Header */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-zinc-800/50 bg-zinc-900/20 rounded-t-2xl shrink-0">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-zinc-900 rounded-lg border border-zinc-800">
@@ -167,12 +161,9 @@ const ChangelogModal: React.FC<ChangelogModalProps> = ({ isOpen, onClose }) => {
             <X className="w-5 h-5" />
           </button>
         </div>
-
-        {/* Scrollable Content */}
         <div className="overflow-y-auto p-6 pb-8 custom-scrollbar space-y-8 rounded-b-2xl">
           {rawChangelog.map((section, idx) => (
             <div key={idx} className="relative">
-              {/* Timeline line */}
               {idx !== rawChangelog.length - 1 && (
                 <div className="absolute left-[19px] top-10 bottom-[-32px] w-px bg-zinc-800/50" />
               )}
@@ -200,7 +191,6 @@ const ChangelogModal: React.FC<ChangelogModalProps> = ({ isOpen, onClose }) => {
             </div>
           ))}
         </div>
-        {/* Footer Removed */}
       </div>
     </div>
   );
