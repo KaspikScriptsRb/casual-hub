@@ -43,10 +43,8 @@ const Snowfall: React.FC = () => {
         
         canvas.width = window.innerWidth * dpr;
         canvas.height = window.innerHeight * dpr;
-        
         canvas.style.width = `${window.innerWidth}px`;
         canvas.style.height = `${window.innerHeight}px`;
-        
         ctx.scale(dpr, dpr);
 
         initFlakes(window.innerWidth, window.innerHeight);
@@ -58,7 +56,6 @@ const Snowfall: React.FC = () => {
 
     const render = () => {
       if (!ctx || !canvas) return;
-      
       ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
       flakes.forEach((flake) => {
