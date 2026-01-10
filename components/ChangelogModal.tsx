@@ -34,6 +34,33 @@ const rawChangelog = [
     ]
   },
   {
+    title: "Bubble Gum Simulator INFINITY Version 1.0",
+    items: [
+      "[+] Auto Blow Bubble",
+      "[+] Auto Sell",
+      "[+] Auto Buy Flavor",
+      "[+] Auto Buy Gum",
+      "[+] Auto-PickUp",
+      "[+] Auto Open Eggs",
+      "[+] Unlock All Eggs",
+      "[+] Auto Claim Index Rewards",
+      "[+] Auto Claim Playtime Rewards",
+      "[+] Auto Claim Season 12 Rewards",
+      "[+] Auto Claim Prizes",
+      "[+] Auto Complete Quests [BETA]",
+      "[+] Redeem All Codes",
+      "[+] Clear Logs",
+      "[+] Anti-Lag",
+      "[+] Auto Send Webhook with Filters [OP]",
+      "[+] WalkSpeed",
+      "[+] JumpPower",
+      "[+] InfJump",
+      "[+] Fly",
+      "[+] Unlock All Overworld Islands",
+      "[+] Teleport to island"
+    ]
+  },
+  {
     title: "The Lost Front",
     items: [
       "[-] Fixed script loading error"
