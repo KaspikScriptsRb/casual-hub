@@ -11,6 +11,7 @@ interface Snowflake {
 
 const Snowfall: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const prevWidthRef = useRef<number>(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -39,15 +40,29 @@ const Snowfall: React.FC = () => {
 
     const handleResize = () => {
       if (canvas && ctx) {
+        const currentWidth = window.innerWidth;
+        const currentHeight = window.innerHeight;
+
+        if (currentWidth === prevWidthRef.current && prevWidthRef.current !== 0) {
+             canvas.height = currentHeight * (window.devicePixelRatio || 1);
+             canvas.style.height = `${currentHeight}px`;
+             ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+             return;
+        }
+
+        prevWidthRef.current = currentWidth;
+
         const dpr = window.devicePixelRatio || 1;
         
-        canvas.width = window.innerWidth * dpr;
-        canvas.height = window.innerHeight * dpr;
-        canvas.style.width = `${window.innerWidth}px`;
-        canvas.style.height = `${window.innerHeight}px`;
+        canvas.width = currentWidth * dpr;
+        canvas.height = currentHeight * dpr;
+
+        canvas.style.width = `${currentWidth}px`;
+        canvas.style.height = `${currentHeight}px`;
+
         ctx.scale(dpr, dpr);
 
-        initFlakes(window.innerWidth, window.innerHeight);
+        initFlakes(currentWidth, currentHeight);
       }
     };
 
@@ -56,6 +71,7 @@ const Snowfall: React.FC = () => {
 
     const render = () => {
       if (!ctx || !canvas) return;
+
       ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
       flakes.forEach((flake) => {
