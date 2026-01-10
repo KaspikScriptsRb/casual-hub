@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, ScrollText, AlertCircle, Plus, Minus, Hash, RefreshCw } from 'lucide-react';
+import { X, ScrollText, AlertCircle, Plus, Minus, Hash, RefreshCw, Clock } from 'lucide-react';
 
 interface ChangelogModalProps {
   isOpen: boolean;
@@ -8,30 +8,26 @@ interface ChangelogModalProps {
 
 const rawChangelog = [
   {
-    title: "Bubble Gum Simulator INFINITY Version 1.0",
+    title: "Bubble Gum Simulator INFINITY Version 1.1",
     items: [
-      "[+] Auto Blow Bubble",
-      "[+] Auto Sell",
-      "[+] Auto Buy Flavor",
-      "[+] Auto Buy Gum",
-      "[+] Auto-PickUp",
-      "[+] Auto Open Eggs",
-      "[+] Unlock All Eggs",
-      "[+] Auto Claim Index Rewards",
-      "[+] Auto Claim Playtime Rewards",
-      "[+] Auto Claim Season 12 Rewards",
-      "[+] Auto Claim Prizes",
-      "[+] Auto Complete Quests [BETA]",
-      "[+] Redeem All Codes",
-      "[+] Clear Logs",
-      "[+] Anti-Lag",
-      "[+] Auto Send Webhook with Filters [OP]",
-      "[+] WalkSpeed",
-      "[+] JumpPower",
-      "[+] InfJump",
-      "[+] Fly",
-      "[+] Unlock All Overworld Islands",
-      "[+] Teleport to island"
+      "Added Events Tab:",
+      "[+] Auto Pick-Up Tickets",
+      "[+] Auto Buy | Circus Shop",
+      "[+] Auto Upgrade",
+      "[+] Auto Win Minigames",
+      "[+] Auto Open Chest (Key needed)",
+      "[+] Executor Info",
+      "[+] Rejoin",
+      "[+] Server Hop",
+      "[+] Anti Lag",
+      "[+] Anti Stealer (Blocks Trades,Gamepasses)",
+      "[/] Added 3 new eggs in Auto Open Eggs",
+      "[/] Fixed Auto Pick-Up Game errors",
+      "[/] Increased JumpPower Slider to 1000",
+      "[SOON] Auto Buy | Ticket Shop",
+      "[SOON] Auto Use Potions",
+      "[SOON] Improve Auto Complete Quests",
+      "[SOON] More Functions"
     ]
   },
   {
@@ -78,12 +74,16 @@ const ChangelogModal: React.FC<ChangelogModalProps> = ({ isOpen, onClose }) => {
   useEffect(() => {
     if (isOpen) {
       setShouldRender(true);
-      const timer = setTimeout(() => {
-        setIsAnimating(true);
-      }, 10);
-      return () => clearTimeout(timer);
+      // Double requestAnimationFrame ensures the browser paints the initial state (opacity-0)
+      // before applying the transition to opacity-100. This is more reliable than setTimeout on mobile.
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setIsAnimating(true);
+        });
+      });
     } else {
       setIsAnimating(false);
+      // Wait for the animation to finish before unmounting (500ms matches CSS duration)
       const timer = setTimeout(() => {
         setShouldRender(false);
       }, 500);
@@ -93,6 +93,7 @@ const ChangelogModal: React.FC<ChangelogModalProps> = ({ isOpen, onClose }) => {
 
   if (!shouldRender) return null;
 
+  // Helper to style tag prefixes
   const renderItem = (text: string) => {
     let icon = <Hash className="w-3.5 h-3.5 text-zinc-500 shrink-0 mt-1" />;
     let content = text;
@@ -114,6 +115,11 @@ const ChangelogModal: React.FC<ChangelogModalProps> = ({ isOpen, onClose }) => {
       content = text.replace("[-]", "").trim();
       className = "text-amber-100/90";
       containerClass = "bg-amber-500/5 border-amber-500/10";
+    } else if (text.startsWith("[SOON]")) {
+      icon = <Clock className="w-3.5 h-3.5 text-purple-400 shrink-0 mt-1" />;
+      content = text.replace("[SOON]", "").trim();
+      className = "text-purple-100/90";
+      containerClass = "bg-purple-500/5 border-purple-500/10";
     }
 
     return (
@@ -144,6 +150,7 @@ const ChangelogModal: React.FC<ChangelogModalProps> = ({ isOpen, onClose }) => {
             : 'scale-90 translate-y-12 opacity-0'
         }`}
       >
+        {/* Header */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-zinc-800/50 bg-zinc-900/20 rounded-t-2xl shrink-0">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-zinc-900 rounded-lg border border-zinc-800">
@@ -161,9 +168,12 @@ const ChangelogModal: React.FC<ChangelogModalProps> = ({ isOpen, onClose }) => {
             <X className="w-5 h-5" />
           </button>
         </div>
+
+        {/* Scrollable Content */}
         <div className="overflow-y-auto p-6 pb-8 custom-scrollbar space-y-8 rounded-b-2xl">
           {rawChangelog.map((section, idx) => (
             <div key={idx} className="relative">
+              {/* Timeline line */}
               {idx !== rawChangelog.length - 1 && (
                 <div className="absolute left-[19px] top-10 bottom-[-32px] w-px bg-zinc-800/50" />
               )}
