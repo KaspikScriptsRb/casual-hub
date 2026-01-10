@@ -13,16 +13,10 @@ const ScriptModal: React.FC<ScriptModalProps> = ({ isOpen, onClose, content }) =
   const [shouldRender, setShouldRender] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
 
+  // Handle mounting/unmounting
   useEffect(() => {
     if (isOpen) {
       setShouldRender(true);
-      // Double requestAnimationFrame ensures the browser paints the initial state (opacity-0)
-      // before applying the transition to opacity-100. This is more reliable than setTimeout on mobile.
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setIsAnimating(true);
-        });
-      });
     } else {
       setIsAnimating(false);
       // Wait for the animation to finish before unmounting (500ms matches CSS duration)
@@ -32,6 +26,19 @@ const ScriptModal: React.FC<ScriptModalProps> = ({ isOpen, onClose, content }) =
       return () => clearTimeout(timer);
     }
   }, [isOpen]);
+
+  // Handle animation start after mount
+  useEffect(() => {
+    if (shouldRender && isOpen) {
+      // Double requestAnimationFrame ensures the browser paints the initial state (opacity-0)
+      // before applying the transition to opacity-100.
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setIsAnimating(true);
+        });
+      });
+    }
+  }, [shouldRender, isOpen]);
 
   if (!shouldRender) return null;
 
@@ -88,7 +95,7 @@ const ScriptModal: React.FC<ScriptModalProps> = ({ isOpen, onClose, content }) =
         <div className="p-6">
           <div className="relative">
             {/* Clean code block without buggy effects */}
-            <pre className="w-full h-32 md:h-28 p-5 rounded-xl bg-black border border-zinc-800 text-zinc-300 font-mono text-xs md:text-sm overflow-x-auto whitespace-pre-wrap break-all shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)]">
+            <pre className="w-full h-32 md:h-28 p-5 rounded-xl bg-black border border-zinc-800 text-zinc-300 font-mono text-xs md:text-sm overflow-x-auto whitespace-pre-wrap break-all shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] select-text cursor-text">
               {content}
             </pre>
           </div>
