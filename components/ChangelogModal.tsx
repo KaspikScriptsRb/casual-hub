@@ -16,14 +16,17 @@ const rawChangelog = [
       "[+] Auto Upgrade",
       "[+] Auto Win Minigames",
       "[+] Auto Open Chest (Key needed)",
+      "",
       "[+] Executor Info",
       "[+] Rejoin",
       "[+] Server Hop",
       "[+] Anti Lag",
       "[+] Anti Stealer (Blocks Trades,Gamepasses)",
+      "",
       "[/] Added 3 new eggs in Auto Open Eggs",
       "[/] Fixed Auto Pick-Up Game errors",
       "[/] Increased JumpPower Slider to 1000",
+      "",
       "[SOON] Auto Buy | Ticket Shop",
       "[SOON] Auto Use Potions",
       "[SOON] Improve Auto Complete Quests",
@@ -71,16 +74,10 @@ const ChangelogModal: React.FC<ChangelogModalProps> = ({ isOpen, onClose }) => {
   const [shouldRender, setShouldRender] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
 
+  // Handle mounting/unmounting
   useEffect(() => {
     if (isOpen) {
       setShouldRender(true);
-      // Double requestAnimationFrame ensures the browser paints the initial state (opacity-0)
-      // before applying the transition to opacity-100. This is more reliable than setTimeout on mobile.
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setIsAnimating(true);
-        });
-      });
     } else {
       setIsAnimating(false);
       // Wait for the animation to finish before unmounting (500ms matches CSS duration)
@@ -91,10 +88,28 @@ const ChangelogModal: React.FC<ChangelogModalProps> = ({ isOpen, onClose }) => {
     }
   }, [isOpen]);
 
+  // Handle animation start after mount
+  useEffect(() => {
+    if (shouldRender && isOpen) {
+      // Double requestAnimationFrame ensures the browser paints the initial state (opacity-0)
+      // before applying the transition to opacity-100.
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setIsAnimating(true);
+        });
+      });
+    }
+  }, [shouldRender, isOpen]);
+
   if (!shouldRender) return null;
 
   // Helper to style tag prefixes
   const renderItem = (text: string) => {
+    // Spacer for empty lines in description
+    if (text.trim() === "") {
+        return <div className="h-3"></div>;
+    }
+
     let icon = <Hash className="w-3.5 h-3.5 text-zinc-500 shrink-0 mt-1" />;
     let content = text;
     let className = "text-zinc-400";
