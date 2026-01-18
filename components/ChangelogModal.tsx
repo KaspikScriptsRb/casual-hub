@@ -8,6 +8,137 @@ interface ChangelogModalProps {
 
 const rawChangelog = [
   {
+    title: "Casual Hub | Escape Tsunami For Brainrots [BIG UPDATE]",
+    items: [
+      "[+] Instant Proximity Prompt",
+      "[+] +50 WalkSpeed",
+      "[+] Free Double Speed",
+      "[+] Free Speed Boost",
+      "[+] Free Super Speed Boost",
+      "[+] Float To Next/Reverse Floor [BETA]",
+      "[+] Player Esp",
+      "[+] Wave Esp",
+      "[+] Floor Esp",
+      "[+] Brainrots Esp",
+      "[+] Auto Upgrade Base",
+      "[+] Auto Rebirth",
+      "[+] Auto Upgrade Speed",
+      "[+] Auto Upgrade Carry",
+      "[+] Auto Spin",
+      "[/] Fixed Auto Collect",
+      "[/] Fixed Auto Upgrade Brainrots",
+      "[-] God Mode [Fixed]",
+      "[-] Brainrot Finder Teleport [Fixed]",
+      "[-] Teleport To Brainrot [Fixed]",
+      "[/] Fixed Auto Claim Playtime Rewards",
+      "[/] Fixed Auto Upgrade"
+    ]
+  },
+  {
+    title: "Casual Hub | Cursed Tank Simulator",
+    items: [
+      "[+] Settings saved",
+      "",
+      "[/] Rework GunMod",
+      "[+] damage multiplier (not tested)",
+      "[/] No Recoil (work)",
+      "[+] clip size (not tested)",
+      "[+] accuracy (work)",
+      "[+] New Hull mod (not tested)",
+      "[+] Acceleration (not tested)",
+      "[+] Torque (not tested)",
+      "[+] turn speed (not tested)",
+      "[+] wheel friction (not tested)",
+      "[+] hull weight (not tested)",
+      "[+] suspensions (not tested)",
+      "[+] New mog detector on server",
+      "[+] notify/kick (not tested)",
+      "[+] ADD language RU and EU (saves to next exec)",
+      "[+] add reset language",
+      "",
+      "Note: If you only want to use penetration, shell speed, overheat mult, just set values and turn on gun switch.",
+      "Best settings:",
+      "Penetration 999999",
+      "Shell speed 999999",
+      "Overheat mult 000000"
+    ]
+  },
+  {
+    title: "Casual Hub | Cursed Tank Simulator (Updates)",
+    items: [
+      "[/] Rework GunMod",
+      "[+] Reload Time (not tested)",
+      "[+] No Recoil",
+      "[+] Recoil force",
+      "[+] Nuke (not tested)",
+      "[+] Explosion Multiplier (not tested)",
+      "[+] Rapid Fire (not tested)",
+      "[+] Ricochet Angle (not tested)",
+      "[+] No Ricochet (not tested)",
+      "[+] Gravity Value (not tested)",
+      "[+] Laser Beams (not tested)",
+      "",
+      "[/] Rework GunMod (machine gun kills improved x10)"
+    ]
+  },
+  {
+    title: "Casual Hub | SCP retroBreach (Rework)",
+    items: [
+      "[/] Rework Esp (SCP, Chaos, Class-D, MTF, Security, Foundation, GOC, Serpents Hand)",
+      "[/] ShowInfo/ShowName",
+      "[/] Rework ESP scp-914",
+      "[+] Fullbright",
+      "[/] Rework ItemEsp (keycards, guns, grenade, meds, misc)",
+      "[+] Aimbot (PC only, fix coming for right mouse)",
+      "[+] Inf ammo",
+      "[+] RCS control (Best: 1.2)",
+      "[+] ESP scp 106 exit"
+    ]
+  },
+  {
+    title: "Casual Hub | Blind Shot",
+    items: [
+      "[+] Esp (Players and Lasers visible)"
+    ]
+  },
+  {
+    title: "Casual Hub | SCP retroBreach (Initial)",
+    items: [
+      "[+] Esp (All classes)",
+      "[+] ShowInfo/ShowName",
+      "[+] ESP scp-914",
+      "[+] Fullbright",
+      "[+] ItemEsp (keycards, guns, grenade, meds, misc)"
+    ]
+  },
+  {
+    title: "Casual Hub | Escape Tsunami for Brainrots Version 1.0",
+    items: [
+      "[+] God Mode",
+      "[+] WalkSpeed Changer",
+      "[+] InfJump",
+      "[+] Fly",
+      "[+] Teleport to Selected Brainrot",
+      "[+] Brainrot Finder [OP]",
+      "[+] Auto Collect",
+      "[+] Auto Upgrade",
+      "[+] Auto Claim Best Brainrots"
+    ]
+  },
+  {
+    title: "Bubble Gum Simulator INFINITY Version 1.2",
+    items: [
+      "[+] Divider Elements",
+      "[+] Auto Use Potions",
+      "[/] Script is fully optimized",
+      "[/] Redeem All Codes (updated list)",
+      "[/] Improved Auto Pick-Up Tickets",
+      "[/] Improved Auto Pick-Up",
+      "[/] Fixed Server Hop",
+      "[/] Fixed Anti Lag"
+    ]
+  },
+  {
     title: "Bubble Gum Simulator INFINITY Version 1.1",
     items: [
       "Added Events Tab:",
@@ -25,12 +156,7 @@ const rawChangelog = [
       "",
       "[/] Added 3 new eggs in Auto Open Eggs",
       "[/] Fixed Auto Pick-Up Game errors",
-      "[/] Increased JumpPower Slider to 1000",
-      "",
-      "[SOON] Auto Buy | Ticket Shop",
-      "[SOON] Auto Use Potions",
-      "[SOON] Improve Auto Complete Quests",
-      "[SOON] More Functions"
+      "[/] Increased JumpPower Slider to 1000"
     ]
   },
   {
@@ -61,38 +187,15 @@ const rawChangelog = [
     ]
   },
   {
-    title: "The Lost Front",
-    items: [
-      "[-] Fixed script loading error"
-    ]
-  },
-  {
-    title: "Counter Blox",
-    items: [
-      "[/] Improved Bunnyhop",
-      "[+] Fast equip",
-      "[+] Fast reload time",
-      "[+] Rapidfire",
-      "[+] Double tap",
-      "[+] Triple tap",
-      "[+] Stored ammo",
-      "[+] Visual Effects (Night mode, Fullbright, Custom atmosphere, Transparent texture, Bullet tracer)",
-      "[+] ThirdPerson",
-      "[/] Improved Bunny hop",
-      "[/] Improved No Spread",
-      "[/] Improved No Recoil"
-    ]
-  },
-  {
     title: "NEW Notoriety: A PAYDAY® Experience",
     items: [
-      "[+] ESP KeyCard (Do not enable keycard ESP if none exist on map to avoid lag)",
-      "[+] AutoPager (Bugs may occur; stand nearby for auto pager to work)",
+      "[+] ESP KeyCard",
+      "[+] AutoPager",
       "[+] Noclip",
-      "[+] Color settings (Citizen, Guard, Police, Camera, KeyCard)",
-      "[+] Infinity Jump (Works even without mask)",
+      "[+] Color settings",
+      "[+] Infinity Jump",
       "[/] Fly (Fixed noclip behavior)",
-      "[-] Script is in beta testing, bugs may occur"
+      "[-] Script is in beta testing"
     ]
   }
 ];
@@ -101,13 +204,11 @@ const ChangelogModal: React.FC<ChangelogModalProps> = ({ isOpen, onClose }) => {
   const [shouldRender, setShouldRender] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  // Handle mounting/unmounting
   useEffect(() => {
     if (isOpen) {
       setShouldRender(true);
     } else {
       setIsAnimating(false);
-      // Wait for the animation to finish before unmounting (500ms matches CSS duration)
       const timer = setTimeout(() => {
         setShouldRender(false);
       }, 500);
@@ -115,11 +216,8 @@ const ChangelogModal: React.FC<ChangelogModalProps> = ({ isOpen, onClose }) => {
     }
   }, [isOpen]);
 
-  // Handle animation start after mount
   useEffect(() => {
     if (shouldRender && isOpen) {
-      // Double requestAnimationFrame ensures the browser paints the initial state (opacity-0)
-      // before applying the transition to opacity-100.
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           setIsAnimating(true);
@@ -130,9 +228,7 @@ const ChangelogModal: React.FC<ChangelogModalProps> = ({ isOpen, onClose }) => {
 
   if (!shouldRender) return null;
 
-  // Helper to style tag prefixes
   const renderItem = (text: string) => {
-    // Spacer for empty lines in description
     if (text.trim() === "") {
         return <div className="h-3"></div>;
     }
@@ -192,7 +288,6 @@ const ChangelogModal: React.FC<ChangelogModalProps> = ({ isOpen, onClose }) => {
             : 'scale-90 translate-y-12 opacity-0'
         }`}
       >
-        {/* Header */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-zinc-800/50 bg-zinc-900/20 rounded-t-2xl shrink-0">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-zinc-900 rounded-lg border border-zinc-800">
@@ -211,11 +306,9 @@ const ChangelogModal: React.FC<ChangelogModalProps> = ({ isOpen, onClose }) => {
           </button>
         </div>
 
-        {/* Scrollable Content */}
         <div className="overflow-y-auto p-6 pb-8 custom-scrollbar space-y-8 rounded-b-2xl">
           {rawChangelog.map((section, idx) => (
             <div key={idx} className="relative">
-              {/* Timeline line */}
               {idx !== rawChangelog.length - 1 && (
                 <div className="absolute left-[19px] top-10 bottom-[-32px] w-px bg-zinc-800/50" />
               )}
